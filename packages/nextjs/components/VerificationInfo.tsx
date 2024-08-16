@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 const VerificationForm: React.FC = () => {
-  const [expiryDate, setExpiryDate] = useState("");
-  const [ageVerification, setAgeVerification] = useState("");
-  const [citizenshipCountry, setCitizenshipCountry] = useState("");
+  const [expiryDate, setExpiryDate] = useState();
+  const [ageVerification, setAgeVerification] = useState(21);
+  const [citizenshipCountry, setCitizenshipCountry] = useState("Canada");
   const [verificationResult, setVerificationResult] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -63,7 +63,9 @@ const Home: React.FC = () => {
             <div>
               <p>Connected Address:</p>
               <Address address={connectedAddress} />
-              <p>Step: {step}</p>
+              {/* <p>Step: {step}</p> */}
+              <br />
+              <button className="btn btn-primary w-full" onClick={() => setStep(2)}>Next</button>
             </div>
           )}
         </div>
