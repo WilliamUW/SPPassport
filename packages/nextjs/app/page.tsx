@@ -36,7 +36,9 @@ const Home: React.FC = () => {
         {steps.map((element, index) => (
           <div key={index + 1} className="mb-4">
             <div
-              className={`collapse collapse-arrow ${step === index ? "collapse-open" : "collapse-close"} bg-base-200`}
+              className={`collapse collapse-arrow bg-base-200 ${
+                step === index + 1 ? "collapse-open bg-blue-500" : "collapse-close"
+              }`}
             >
               <input
                 type="radio"
@@ -54,18 +56,24 @@ const Home: React.FC = () => {
         ))}
       </div>
 
+      {step === 1 && (
+        <div className="mt-8 text-center">
+          {!isConnected && <p>Connect your wallet!</p>}
+          {isConnected && (
+            <div>
+              <p>Connected Address:</p>
+              <Address address={connectedAddress} />
+              <p>Step: {step}</p>
+            </div>
+          )}
+        </div>
+      )}
+
       {step === 2 && <PassportUpload onUpload={handlePassportUpload} />}
 
       {step === 3 && passportData && <PassportInfo data={passportData} onSubmit={handlePassportInfoSubmit} />}
 
       {step === 4 && <VerificationForm />}
-
-      <div className="mt-8 text-center">
-        <p>Connected Address:</p>
-        {!isConnected && <p>Connect your wallet</p>}
-        <Address address={connectedAddress} />
-        <p>Step: {step}</p>
-      </div>
     </div>
   );
 };
