@@ -23,6 +23,7 @@ const PassportUpload: React.FC<PassportUploadProps> = ({ onUpload }) => {
     e.preventDefault();
     if (!image) return;
 
+    alert("Parsing your passport...")
     setIsLoading(true);
     try {
       const reader = new FileReader();
