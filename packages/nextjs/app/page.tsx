@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   const [step, setStep] = useState(2);
   const [passportData, setPassportData] = useState(null);
 
-  const handlePassportUpload = data => {
+  const handlePassportUpload = (data: React.SetStateAction<null>) => {
     setPassportData(data);
     setStep(3);
   };
@@ -23,10 +23,10 @@ const Home: React.FC = () => {
   };
 
   const steps = [
-    { title: "Connect Wallet", component: <ConnectWallet onConnect={() => setStep(2)} /> },
-    { title: "Upload Passport", component: <PassportUpload onUpload={handlePassportUpload} /> },
-    { title: "Confirm Passport Information", component: <PassportInfo data={passportData} onSubmit={handlePassportInfoSubmit} /> },
-    { title: "Verify Passport Conditions", component: <VerificationForm /> },
+    { title: "Connect Wallet" },
+    { title: "Upload Passport" },
+    { title: "Confirm Passport Information" },
+    { title: "Verify Passport Conditions" },
   ];
 
   return (
@@ -39,7 +39,13 @@ const Home: React.FC = () => {
             <div
               className={`collapse collapse-arrow ${step === index ? "collapse-open" : "collapse-close"} bg-base-200`}
             >
-              <input type="radio" name="my-accordion-2" checked={step === (index + 1)} readOnly onClick={() => setStep(index + 1)}/>
+              <input
+                type="radio"
+                name="my-accordion-2"
+                checked={step === index + 1}
+                readOnly
+                onClick={() => setStep(index + 1)}
+              />
               <div className="collapse-title text-xl font-medium">
                 Step {index + 1}: {element.title}
               </div>
