@@ -23,7 +23,7 @@ const PassportUpload: React.FC<PassportUploadProps> = ({ onUpload }) => {
     e.preventDefault();
     if (!image) return;
 
-    alert("Parsing your passport...")
+    alert("Using Gemini 1.5 Pro to parse your passport...")
     setIsLoading(true);
     try {
       const reader = new FileReader();
