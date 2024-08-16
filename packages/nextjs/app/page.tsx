@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { useAccount } from "wagmi";
-import ConnectWallet from "~~/components/ConnectWallet";
 import PassportInfo from "~~/components/PassportInfo";
 import PassportUpload from "~~/components/PassportUpload";
 import VerificationForm from "~~/components/VerificationInfo";
@@ -55,8 +54,6 @@ const Home: React.FC = () => {
         ))}
       </div>
 
-      {step === 1 && !isConnected && <ConnectWallet onConnect={() => setStep(2)} />}
-
       {step === 2 && <PassportUpload onUpload={handlePassportUpload} />}
 
       {step === 3 && passportData && <PassportInfo data={passportData} onSubmit={handlePassportInfoSubmit} />}
@@ -65,6 +62,7 @@ const Home: React.FC = () => {
 
       <div className="mt-8 text-center">
         <p>Connected Address:</p>
+        {!isConnected && <p>Connect your wallet</p>}
         <Address address={connectedAddress} />
         <p>Step: {step}</p>
       </div>
