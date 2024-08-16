@@ -65,7 +65,9 @@ const Home: React.FC = () => {
               <Address address={connectedAddress} />
               {/* <p>Step: {step}</p> */}
               <br />
-              <button className="btn btn-primary w-full" onClick={() => setStep(2)}>Next</button>
+              <button className="btn btn-primary w-full" onClick={() => setStep(2)}>
+                Next
+              </button>
             </div>
           )}
         </div>
@@ -74,8 +76,7 @@ const Home: React.FC = () => {
       {step === 2 && <PassportUpload onUpload={handlePassportUpload} />}
 
       {step === 3 && passportData && <PassportInfo data={passportData} onSubmit={handlePassportInfoSubmit} />}
-      {step === 3 && !passportData && <h2 className="text-2xl font-bold mb-4">Please upload your passport first!</h2>
-      }
+      {step === 3 && !passportData && <h2 className="text-2xl font-bold mb-4">Please upload your passport first!</h2>}
 
       {step === 4 && <VerificationForm />}
     </div>
