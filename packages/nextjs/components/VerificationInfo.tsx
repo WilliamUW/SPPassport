@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const VerificationForm: React.FC = () => {
-  const [expiryDate, setExpiryDate] = useState();
+  const [expiryDate, setExpiryDate] = useState<string | undefined>(undefined);
   const [ageVerification, setAgeVerification] = useState(21);
   const [citizenshipCountry, setCitizenshipCountry] = useState("Canada");
   const [verificationResult, setVerificationResult] = useState<string | null>(null);
@@ -25,7 +25,7 @@ const VerificationForm: React.FC = () => {
             type="date"
             id="expiryDate"
             value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
+            onChange={e => setExpiryDate(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -39,7 +39,7 @@ const VerificationForm: React.FC = () => {
             min="0"
             max="100"
             value={ageVerification}
-            onChange={(e) => setAgeVerification(e.target.value)}
+            onChange={e => setAgeVerification(parseInt(e.target.value) ?? 21)}
             className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -50,7 +50,7 @@ const VerificationForm: React.FC = () => {
           <select
             id="citizenshipCountry"
             value={citizenshipCountry}
-            onChange={(e) => setCitizenshipCountry(e.target.value)}
+            onChange={e => setCitizenshipCountry(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="">Select a country</option>
@@ -64,11 +64,7 @@ const VerificationForm: React.FC = () => {
           Generate ZK Proof
         </button>
       </form>
-      {verificationResult && (
-        <div className="mt-4 p-4 bg-success text-white rounded">
-          {verificationResult}
-        </div>
-      )}
+      {verificationResult && <div className="mt-4 p-4 bg-success text-white rounded">{verificationResult}</div>}
     </div>
   );
 };

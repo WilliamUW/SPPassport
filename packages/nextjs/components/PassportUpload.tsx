@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory, Part } from "@google/generative-ai";
 
 interface PassportUploadProps {
   onUpload: (data: any) => void;
@@ -24,23 +25,51 @@ const PassportUpload: React.FC<PassportUploadProps> = ({ onUpload }) => {
 
     setIsLoading(true);
     try {
-      // TODO: Implement image upload and parsing logic using Gemini API
-      // For now, we'll simulate the parsing with a timeout
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simulated parsed data
-      const parsedData = {
-        firstName: "John",
-        lastName: "Doe",
-        citizenshipCountry: "United States",
-        birthDate: "1990-01-01",
-        passportNumber: "123456789",
-        placeOfBirth: "New York",
-        dateOfExpiry: "2030-01-01",
-        gender: "Male",
-      };
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = async () => {
+        const base64Image = reader.result?.toString().split(",")[1];
 
-      onUpload(parsedData);
+        const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || "");
+        const model = genAI.getGenerativeModel({
+          model: "gemini-1.5-pro",
+          safetySettings: [
+            {
+              category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+              threshold: HarmBlockThreshold.BLOCK_NONE,
+            },
+          ],
+        });
+        const prompt = `System Prompt for Passport Photo Parsing
+
+User Input: Upload a passport photo image.
+
+Task: Parse the image and extract the following information in JSON format:
+
+{
+  "firstName": "string",
+  "lastName": "string",
+  "citizenshipCountry": "string",
+  "birthDate": "YYYY-MM-DD",
+  "passportNumber": "string",
+  "placeOfBirth": "string",
+  "dateOfExpiry": "YYYY-MM-DD",
+  "gender": "string"
+}`;
+        const image: Part = {
+          inlineData: {
+            data: base64Image || "",
+            mimeType: "image/png",
+          },
+        };
+
+        const result = await model.generateContent([prompt, image]);
+        console.log(result.response.text());
+
+        const generatedContent = result.response.text().replaceAll("```", "").replaceAll("json", "");
+        const parsedData = JSON.parse(generatedContent);
+        onUpload(parsedData);
+      };
     } catch (error) {
       console.error("Error parsing passport:", error);
       // Handle error (e.g., show error message to user)
@@ -53,22 +82,13 @@ const PassportUpload: React.FC<PassportUploadProps> = ({ onUpload }) => {
     <div className="flex flex-col items-center">
       <h2 className="text-2xl font-bold mb-4">Upload Passport Photo</h2>
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="mb-4"
-        />
+        <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4" />
         {preview && (
           <div className="mb-4">
             <Image src={preview} alt="Passport preview" width={300} height={200} />
           </div>
         )}
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={!image || isLoading}
-        >
+        <button type="submit" className="btn btn-primary" disabled={!image || isLoading}>
           {isLoading ? "Processing..." : "Upload and Parse"}
         </button>
       </form>

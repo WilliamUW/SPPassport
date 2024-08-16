@@ -822,6 +822,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@google/generative-ai@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "@google/generative-ai@npm:0.17.0"
+  checksum: e4cf34458bc5c6abab5b83e4ededdb9ed6b4c6f4b02890e625d0055f2182a10d4422208e7bf5dcf5c6acf8230724d974a993f853d86b911d4b462cac7b7cf893
+  languageName: node
+  linkType: hard
+
 "@heroicons/react@npm:^2.0.11":
   version: 2.0.18
   resolution: "@heroicons/react@npm:2.0.18"
@@ -12561,6 +12568,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "se-2@workspace:."
   dependencies:
+    "@google/generative-ai": ^0.17.0
     husky: ^8.0.1
     lint-staged: ^13.0.3
   languageName: unknown
