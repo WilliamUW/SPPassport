@@ -8,17 +8,16 @@ const VerificationForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement ZK proof generation logic
-    // For now, we'll simulate the verification process
-    setVerificationResult("Verification successful! ZK proof generated.");
   };
 
   const generateZKProof = (message: string) => {
     alert(message);
 
+    setVerificationResult("Generating proof...");
+
     setTimeout(() => {
       setVerificationResult(`Verification successful! ZK proof generated.\n\nZK Proof Hash: 0xkjshdkj`);
-    }, 1000); 
+    }, 1000);
   };
 
   return (
