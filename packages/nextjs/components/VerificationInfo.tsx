@@ -88,7 +88,7 @@ const VerificationForm: React.FC = () => {
           </button>
         </div>
       </form>
-      {verificationResult && <div className="mt-4 p-4 bg-success text-white rounded whitespace-pre-wrap w-1/3">{verificationResult}</div>}
+      {verificationResult && <div className="mt-4 p-4 bg-success text-white rounded whitespace-pre-wrap  w-full">{verificationResult}</div>}
     </div>
   );
 };
