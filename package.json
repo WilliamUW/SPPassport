@@ -37,6 +37,7 @@
   },
   "packageManager": "yarn@3.2.3",
   "devDependencies": {
+    "@types/three": "^0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3"
   },
@@ -44,6 +45,12 @@
     "node": ">=18.17.0"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.17.0"
+    "@google/generative-ai": "^0.17.0",
+    "@react-three/drei": "^9.111.0",
+    "@react-three/fiber": "^8.17.5",
+    "@react-three/rapier": "^1.4.0",
+    "leva": "^0.9.35",
+    "meshline": "^3.3.1",
+    "three": "^0.167.1"
   }
 }

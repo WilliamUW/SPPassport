@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useAccount } from "wagmi";
+import Badge from "~~/components/Badge";
 import PassportInfo from "~~/components/PassportInfo";
 import PassportUpload from "~~/components/PassportUpload";
 import VerificationForm from "~~/components/VerificationInfo";
@@ -79,6 +80,9 @@ const Home: React.FC = () => {
       {step === 3 && !passportData && <h2 className="text-2xl font-bold mb-4">Please upload your passport first!</h2>}
 
       {step === 4 && <VerificationForm />}
+      <div className="mt-5" style={{width: 500, height: 800}}>
+        <Badge />
+      </div>
     </div>
   );
 };
