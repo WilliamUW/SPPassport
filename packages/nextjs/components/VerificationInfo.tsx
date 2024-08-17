@@ -16,8 +16,8 @@ const VerificationForm: React.FC = () => {
     setVerificationResult("Generating proof...");
 
     setTimeout(() => {
-      setVerificationResult(`Verification successful! ZK proof generated.\n\nZK Proof Hash: 0xkjshdkj`);
-    }, 1000);
+      setVerificationResult(`Verification successful! ZK proof generated.\n\nZK Proof: SP1ProofWithPublicValues { proof: Core([ShardProof, ShardProof, ShardProof]), stdin: SP1Stdin { buffer: [[20, 0, 0, 0]], ptr: 0, proofs: [] }, public_values: SP1PublicValues { buffer: Buffer { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 109, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 194], ptr: 0 } }, sp1_version: "v1.1.0" }`);
+    }, 3000);
   };
 
   return (
