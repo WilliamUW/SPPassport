@@ -9,7 +9,7 @@ import { Address } from "~~/components/scaffold-eth";
 
 const Home: React.FC = () => {
   const { address: connectedAddress, isConnected } = useAccount();
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(isConnected ? 2 : 1);
   const [passportData, setPassportData] = useState(null);
 
   const handlePassportUpload = (data: React.SetStateAction<null>) => {

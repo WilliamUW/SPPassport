@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const VerificationForm: React.FC = () => {
-  const [expiryDate, setExpiryDate] = useState<string | undefined>(undefined);
+  const [expiryDate, setExpiryDate] = useState<string | undefined>("2024-08-16");
   const [ageVerification, setAgeVerification] = useState(21);
   const [citizenshipCountry, setCitizenshipCountry] = useState("Canada");
   const [verificationResult, setVerificationResult] = useState<string | null>(null);
@@ -11,6 +11,14 @@ const VerificationForm: React.FC = () => {
     // TODO: Implement ZK proof generation logic
     // For now, we'll simulate the verification process
     setVerificationResult("Verification successful! ZK proof generated.");
+  };
+
+  const generateZKProof = (message: string) => {
+    alert(message);
+
+    setTimeout(() => {
+      setVerificationResult(`Verification successful! ZK proof generated.\n\nZK Proof Hash: 0xkjshdkj`);
+    }, 1000); 
   };
 
   return (
@@ -28,6 +36,12 @@ const VerificationForm: React.FC = () => {
             onChange={e => setExpiryDate(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
           />
+          <button
+            onClick={() => generateZKProof(`Generating ZK Proof to verify passport is not expired on ${expiryDate}`)}
+            className="btn btn-primary w-full mt-2"
+          >
+            Generate ZK Proof for Expiry before {expiryDate}
+          </button>
         </div>
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2" htmlFor="ageVerification">
@@ -42,6 +56,12 @@ const VerificationForm: React.FC = () => {
             onChange={e => setAgeVerification(parseInt(e.target.value) ?? 21)}
             className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
           />
+          <button
+            onClick={() => generateZKProof(`Generating ZK Proof to verify age over: ${ageVerification}`)}
+            className="btn btn-primary w-full mt-2"
+          >
+            Generate ZK Proof for Age over {ageVerification}
+          </button>
         </div>
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2" htmlFor="citizenshipCountry">
@@ -59,12 +79,17 @@ const VerificationForm: React.FC = () => {
             <option value="UK">United Kingdom</option>
             {/* Add more countries as needed */}
           </select>
+          <button
+            onClick={() =>
+              generateZKProof(`Generating ZK Proof to verify user is a citizenship of ${citizenshipCountry}`)
+            }
+            className="btn btn-primary w-full mt-2"
+          >
+            Generate ZK Proof for {citizenshipCountry} Citizenship
+          </button>
         </div>
-        <button type="submit" className="btn btn-primary w-full">
-          Generate ZK Proof
-        </button>
       </form>
-      {verificationResult && <div className="mt-4 p-4 bg-success text-white rounded">{verificationResult}</div>}
+      {verificationResult && <div className="mt-4 p-4 bg-success text-white rounded whitespace-pre-wrap">{verificationResult}</div>}
     </div>
   );
 };
